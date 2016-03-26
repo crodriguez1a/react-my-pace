@@ -1,0 +1,19 @@
+{
+  "name": "vanilla_login",
+  "version": "0.0.0",
+  "authors": [
+    "Carlos Rodriguez <carlos.rodriguez@ally.com>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {},
+  "devDependencies": {
+    "qunit": "~1.19.0"
+  }
+}
