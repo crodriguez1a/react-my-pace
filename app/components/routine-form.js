@@ -261,12 +261,6 @@ class RoutineForm extends React.Component {
     if (this.state.dirty && this.state.editMode) {
       this.syncWithSession();
     }
-
-    // pause the clock
-    let controls = this.state.controls;
-    if (controls.state.status === 'started') {
-      controls.pauseTimer();
-    }
   }
 
   /**
