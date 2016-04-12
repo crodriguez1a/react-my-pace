@@ -23,6 +23,7 @@ class ProgressControls extends React.Component {
       active: 'pause'
     };
     this.keyboardControl();
+    this.tapControl();
   }
 
   /**
@@ -36,11 +37,25 @@ class ProgressControls extends React.Component {
       // Enable Spacebar
       if (e.keyIdentifier === 'U+0020') {
         e.preventDefault();
-        if (this.state.status === 'stopped' || this.state.status === 'paused') {
-          this.startTimer();
-        } else {
+        if (this.state.status === 'started') {
           this.pauseTimer();
+        } else {
+          this.startTimer();
         }
+      }
+    });
+  }
+
+  /**
+    Provide user with pause play access from clicking/tapping on theme container
+
+    @method tapControl
+    @private
+  */
+  tapControl = () => {
+    document.getElementById('theme').addEventListener('click', (e) => {
+      if (this.state.status === 'started') {
+        this.pauseTimer();
       }
     });
   }
