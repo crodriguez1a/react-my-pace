@@ -1,0 +1,146 @@
+.routine {
+  &.content {
+    padding: 1rem;
+    padding-top: 2rem;
+    min-height: 10rem;
+
+    .button {
+      display: inline-block;
+      min-height: 2rem;
+
+      i {
+        display: inline-block;
+        height: 100%;
+        padding-top: 0.25rem;
+      }
+
+      &.is-primary {
+        &:hover {
+          background: $blue2;
+          border-color: $blue2;
+        }
+      }
+    }
+
+    .button:not(.is-primary) {
+      color: white;
+
+      &.is-active {
+        color: $dark-canvas;
+      }
+
+      &:hover {
+        color: $blue;
+      }
+    }
+
+    label {
+      color: white;
+      font-size: 0.65rem;
+      opacity: 0.8;
+      text-transform: uppercase;
+    }
+  }
+
+  .routine-form {
+    position: relative;
+
+    .control {
+      &.hide {
+        display: none;
+      }
+
+      &.toggle-buttons {
+        .button {
+          min-width: 50%;
+        }
+      }
+    }
+
+    input {
+      border-color: $blue-75;
+      background: none;
+
+      &[type="text"], &[type="number"], &[type="password"] {
+        color: white;
+      }
+    }
+
+    .manage-routine {
+      margin: 0;
+      padding: 0 1rem 1rem 0;
+      text-align: center;
+
+      li {
+        display: inline-block;
+        vertical-align: top;
+        margin: 0 1em 0 0;
+
+        &.edit-routine {
+          .button {
+            background: none;
+            color: $blue;
+            border-color: $blue-75;
+
+            &:hover, &.is-active {
+              background: $yellow;
+              color: $dark-canvas;
+              border-color: $yellow;
+            }
+          }
+        }
+      }
+    }
+
+    .select {
+      &:after {
+        border-color: $blue;
+      }
+
+      select {
+        background: none;
+        border-color: $blue-75;
+        color: $blue;
+      }
+    }
+
+    .toggle-list {
+      margin: 0;
+
+      li {
+        display: inline-block;
+        vertical-align: middle;
+        margin: 0 1rem 1rem 0;
+        text-align: center;
+
+        .button:not(.is-active) {
+          background: none;
+          border-color: $blue-75;
+
+          &:hover {
+            background: $yellow;
+            border-color: $yellow;
+            color: $dark-canvas;
+          }
+        }
+
+        .button {
+          &.is-active {
+            background: $blue;
+            border-color: $blue;
+
+            &:hover {
+              color: $dark-canvas;
+            }
+          }
+        }
+      }
+    }
+
+    .help {
+      text-align: right;
+      color: $grey;
+      font-size: 125%;
+    }
+  }
+}

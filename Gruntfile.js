@@ -1,21 +1,28 @@
 var httpMock = require('./httpMock/server');
+var _ = require('lodash');
 
-var commonTasks = [
+var developmentTasks = [
   'browserify:common',
-  //'jshint',
-  //'jscs',
+  'jscs',
+  // 'eslint', TODO
+  'template:common',
   'copy:common',
   'sass:common',
-  'concat:common',
-  //'uglify:common',
-  //'copy:tests',
-  //'concat:tests',
-  //'browserify:tests'
+  'postcss',
+  'concat:common'
 ];
 
-var prod = [
-  //TODO separate prod and dev builds
-];
+var productionTasks = _.without(developmentTasks.concat([
+  'uglify:common',
+  'htmlmin:common',
+  'copy:prod'
+]), 'jscs');
+
+var testingTasks = developmentTasks.concat([
+  'copy:tests',
+  'concat:tests',
+  'browserify:tests'
+]);
 
 var commonConcat   = [
   'bower_components/**/*.js',
@@ -24,42 +31,25 @@ var commonConcat   = [
   '!bower_components/qunit-once/**/*.js'
 ];
 
-var babelWhiteList = [
-  'strict',
-  'es6.arrowFunctions',
-  'es6.modules',
-  'es6.parameters.rest',
-  'es6.parameters.default',
-  'es6.destructuring',
-  'es6.spread',
-  'es6.blockScoping',
-  'es6.classes',
-  'es6.constants',
-  'es6.properties.shorthand',
-  'es6.templateLiterals',
-  'es6.properties.computed'
-];
-
 module.exports = function(grunt) {
   require('load-grunt-tasks')(grunt);
 
   grunt.config('env', grunt.option('env') || process.env.GRUNT_ENV || 'development');
   grunt.initConfig({
 
-    //Ensure that esnext features are backwards compatible
+    // Ensure that esnext features are backwards compatible
     browserify: {
       common: {
         options: {
           'transform': [
             [ 'babelify',
               {
-              'presets': ['react', 'babel-preset-es2015']
+                'presets': ['es2015', 'react'],
+                'plugins': ['transform-class-properties']
               }
             ]
           ]
         },
-        //$ browserify -t [ babelify --presets [ react ] ] main.js -o bundle.js
-
         files: {
           'build/assets/app.js' : 'app/app.js',
         }
@@ -69,7 +59,7 @@ module.exports = function(grunt) {
           transform: [
             [ 'babelify',
               {
-              'whitelist': babelWhiteList
+                'presets': ['react', 'babel-preset-es2015']
               }
             ]
           ]
@@ -80,37 +70,43 @@ module.exports = function(grunt) {
       }
     },
 
-    //TODO update to eslint
-    //Run jshint on all app js files
-    jshint: {
-      all: ['app/**/*.js'],
-      options: {
-        jshintrc: '.jshintrc'
-      }
-    },
-
-    //Run jscs on all app js files
-    jscs: {
-      src: "app/**/*.js",
-      options: {
-        config: ".jscsrc"
-      }
-    },
-
-    //Compile css
+    // Compile css
     sass: {
       common: {
         options: {
-          style: 'compressed'
+          style: 'compressed',
+          sourcemap: 'inline'
         },
         files: {
           'build/assets/app.min.css': 'app/styles/app.scss',
-          'build/assets/vendor.min.css': 'vendor/styles/vendor.scss'
+          'build/assets/bulma.min.css': 'bower_components/bulma/bulma.sass',
+          'build/assets/vendor.min.css': ['vendor/styles/vendor.scss']
         }
       }
     },
 
-    //Flatten js
+    postcss: {
+      options: {
+        map: true, // inline sourcemaps
+
+        // or
+        map: {
+            inline: false, // save all sourcemaps as separate files...
+            annotation: 'build/assets/maps/' // ...to the specified directory
+        },
+
+        processors: [
+          require('pixrem')(), // add fallbacks for rem units
+          require('autoprefixer')({browsers: 'last 2 versions'}), // add vendor prefixes
+          require('cssnano')() // minify the result
+        ]
+      },
+      dist: {
+        src: 'build/assets/*.css'
+      }
+    },
+
+    // Flatten js
     concat: {
       options: {
         separator: ';'
@@ -127,11 +123,23 @@ module.exports = function(grunt) {
       }
     },
 
-    //Uglify/Minify
+    // JSCS
+    jscs: {
+      src: "app/**/*.js",
+      options: {
+        config: ".jscsrc",
+        esnext: true, // If you use ES6 http://jscs.info/overview.html#esnext
+        verbose: true, // If you need output with rule names http://jscs.info/overview.html#verbose
+        fix: true, // Autofix code style violations when possible.
+        requireCurlyBraces: [ "if" ]
+      }
+    },
+
+    // uglify / minify
     uglify: {
       options: {
         mangle: {
-          except: []
+          except: [ /* Globals */ ]
         }
       },
       common: {
@@ -142,16 +150,44 @@ module.exports = function(grunt) {
       }
     },
 
-    //Test with QUnit
+    // Compile template
+    template : {
+      common: {
+        options: {
+          data: {
+            env: grunt.config('env'),
+          }
+        },
+        files: {
+          'build/index.html': ['app/index.tpl']
+        }
+      }
+    },
+
+    //Minify HTML
+    htmlmin: {
+      common: {
+        options: {
+          removeComments: true,
+          collapseWhitespace: true
+        },
+        files: {
+          'build/index.html': 'build/index.html'
+        }
+      }
+    },
+
+    // Test with QUnit
     qunit: {
       all: ['tests/**/*.html']
     },
 
-    //Copy assets from demo
+    // Copy assets from demo
     copy: {
       common: {
         files: [
-          { src: ['demo/fonts/*'], dest: 'build/assets/' }
+          { expand: true, flatten: true, src: ['bower_components/font-awesome/fonts/*', 'bower_components/typicons.font/src/font/*'], dest: 'build/fonts/' },
+          { expand: true, flatten: true, src: ['public/assets/sounds/*'], dest: 'build/assets/sounds/' }
         ]
       },
       tests: {
@@ -162,13 +198,15 @@ module.exports = function(grunt) {
       },
       prod: {
         files: [
-          { expand: true, cwd: 'build/', src:['*.*'], dest: 'login/' },
-          { expand: true, cwd: 'build/assets', src:['*.*'], dest: 'login/assets' }
+          { expand: true, cwd: 'build/', src:['*.*'], dest: 'dist/' },
+          { expand: true, cwd: 'build/assets', src:['*.*'], dest: 'dist/assets' },
+          { expand: true, cwd: 'build/fonts', src:['*.*'], dest: 'dist/fonts' },
+          { expand: true, cwd: 'build/assets/sounds', src:['*.*'], dest: 'dist/assets/sounds' }
         ]
       }
     },
 
-    //Serve project
+    // Serve project
     connect: {
       server: {
         options: {
@@ -176,12 +214,12 @@ module.exports = function(grunt) {
           base: {
             path: 'build'
           },
-          onCreateServer : httpMock.onCreateServer,
-          middleware     : httpMock.middleware
+          onCreateServer: httpMock.onCreateServer,
+          middleware: httpMock.middleware
         }
       },
 
-      //Serve tests
+      // Serve tests
       tests: {
         options: {
           port: 1334,
@@ -193,41 +231,12 @@ module.exports = function(grunt) {
       }
     },
 
-    //Watch for changes
+    // Watch for changes
     watch: {
       all: {
-        options: { livereload: 1337 },
-        files: [ 'app/**/*', 'tests/**/*', 'config/**/*', 'demo/**/*', '!tests/utils/*', '!tests/assets/*', '!demo/assets/*', 'vendor/**/*'],
-        tasks: commonTasks.concat([ 'bell' ])
-      }
-    },
-
-    /**
-      Deployment Tasks
-       clean,
-       htmlmin,
-       compress
-    */
-
-    //Clean up demo assets
-    clean: {
-      demo: {
-        src: ['build/assets/demo']
-      },
-      prod: {
-        src: ['dist/']
-      }
-    },
-
-    //Compress build to zip file
-    compress: {
-      build: {
-        options: {
-          archive: 'sites.zip'
-        },
-        files: [
-          { src: ['./login/index.html', './login/assets/app.min.js', './login/assets/app.min.css', './login/assets/vendor.min.js', './login/assets/vendor.min.css'], dest: 'sites/' }
-        ]
+        options: { livereload: 35729 },
+        files: [ 'app/**/*', 'config/**/*', 'tests/**/*', 'vendor/**/*', '!tests/utils/*', '!tests/assets/*'],
+        tasks: developmentTasks.concat([ 'bell' ])
       }
     }
   });
@@ -235,16 +244,8 @@ module.exports = function(grunt) {
   /*
     Build Task
       Execute common tasks and all deployment tasks
-      Note: environment must be specified as production (eg, grunt build --env production)
-      See README for more details
   */
-  grunt.registerTask('build', commonTasks.concat([ 'copy:prod', 'compress:build', 'clean:prod', 'bell' ]));
-
-  /**
-    Init Task
-      Execute all common tasks
-  */
-  grunt.registerTask('init', commonTasks.concat([ 'bell' ]));
+  grunt.registerTask('build', productionTasks.concat(['bell']));
 
   /*
     Serve Task
@@ -256,8 +257,7 @@ module.exports = function(grunt) {
   */
   grunt.registerTask('serve', [
     'connect:server',
-    //'connect:tests',
-    'init',
+    // 'connect:tests',
     'watch'
   ]);
 };

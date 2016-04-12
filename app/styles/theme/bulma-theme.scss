@@ -1,0 +1,64 @@
+$map: (
+  "is-primary": $blue,
+  "is-info": $navy,
+  "is-success": $green,
+  "is-warning": $yellow,
+  "is-danger": $red
+);
+
+$generic: $grey;
+
+.mp-bulma {
+  .hero, div.notification, div.message, a.button, span.tag, .checkbox input:checked, .menu-checkbox input:checked, .radio input:checked {
+    @each $modifier, $color in $map {
+      &.#{$modifier} {
+        background: #{$color};
+        border-color: #{$color};
+        box-shadow: none;
+
+        &:hover {
+          background: #{$color};
+          border-color: #{$color};
+        }
+
+        &.is-outlined {
+          border-color: #{$color};
+          background: none;
+          color: #{$color};
+        }
+
+        /*
+         outliers
+        */
+        .message-header {
+          background: #{$color};
+        }
+
+        .message-body {
+          border-color: #{$color};
+          background: white;
+        }
+      }
+    }
+  }
+
+  .control {
+    &.is-grouped {
+      //display: -webkit-flex;
+    }
+  }
+
+  //Bulma source: Select control currently does not have modifiers applied (use generic)
+  .select, .control .select {
+    select {
+      &:hover, &:focus {
+        // border-color: $generic;
+        // outline-color: $generic;
+      }
+    }
+    &:after {
+      // border-color: $generic
+      border-width: 2px;
+    }
+  }
+}

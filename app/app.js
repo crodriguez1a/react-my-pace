@@ -1,20 +1,37 @@
-import Modules from './modules/index';
+import Polyfills from './utils/polyfills';
+import Controllers from './controllers/index';
+import attachFastClick from 'fastclick';
+import Session from './session/routine';
 
 export const App = {
   name: 'react-my-pace',
   /**
-    Initialize all the modules
+    Initialize all the Controllers
 
-    @method _initializeModules
+    @method _initializeControllers
     @private
   */
-  _initializeModules() {
-    for (let i in Modules) {
-      Modules[i].init();
+  initializeControllers() {
+    for (let i in Controllers) {
+      let controller = new Controllers[i]();
+      controller.init();
     }
   },
+
+  /**
+    Apply a theme from local storage or use default
+
+    @method applyTheme
+    @private
+  */
+  applyTheme(theme) {
+    document.getElementById('theme').className = `section ${theme}`;
+  },
+
   init() {
-    this._initializeModules();
+    this.initializeControllers();
+    this.applyTheme(Session.find('theme'));
+    attachFastClick(document.body);
   }
 };
 

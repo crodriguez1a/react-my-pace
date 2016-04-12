@@ -1,0 +1,24 @@
+.rest-duration {
+  position: absolute;
+  width: 100%;
+  top: 15rem;
+  color: $white-75;
+
+  li {
+    &.label {
+      margin: 0;
+      padding: 0;
+
+      i {
+        color: $white-75;
+        &.hide {
+          display: none;
+        }
+      }
+    }
+
+    &.duration {
+      font-weight: 600;
+    }
+  }
+}
