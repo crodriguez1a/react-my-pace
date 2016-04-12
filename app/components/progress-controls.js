@@ -59,7 +59,7 @@ class ProgressControls extends React.Component {
       status: this.state.timer.start().getStatus(),
       active: 'play'
     });
-    console.log(Session.find('withSound'));
+
     if (Session.find('withSound')) {
       audioPlayer.play(Sounds.play);
     }

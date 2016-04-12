@@ -19,6 +19,7 @@ class RoutineForm extends React.Component {
       timer: props.timer,
       units: props.units,
       controller: props.controller,
+      controls: props.controls,
       dirty: true,
       routine: Session.find('name'),
       interval: Session.find('interval'),
@@ -174,7 +175,6 @@ class RoutineForm extends React.Component {
       totalTasks: routine.find('totalTasks'),
       shouldRest: routine.find('shouldRest'),
       restInterval: routine.find('restInterval'),
-      withSound: routine.find('withSound'),
       routine: routine.find('name')
     });
   }
@@ -226,7 +226,6 @@ class RoutineForm extends React.Component {
     let totalTasks = this.state.totalTasks;
     let shouldRest = this.state.shouldRest;
     let showNext = this.state.showNext;
-    let withSound = this.state.withSound;
     let restInterval = this.state.restInterval;
     let interval = this.state.interval;
     let name = this.state.routine;
@@ -261,6 +260,12 @@ class RoutineForm extends React.Component {
     // when collapsing form, if dirty, sync with session
     if (this.state.dirty && this.state.editMode) {
       this.syncWithSession();
+    }
+
+    // pause the clock
+    let controls = this.state.controls;
+    if (controls.state.status === 'started') {
+      controls.pauseTimer();
     }
   }
 
