@@ -1,0 +1,56 @@
+.progress-controls {
+  .tabs {
+    border-bottom: 1em solid $white-25;
+    margin-top: 1em;
+
+    ul {
+      border: none;
+
+      li {
+        display: inline-block;
+        &.is-active a {
+          background: none;
+          color: $yellow;
+          &:after {
+            content: '\f0d8';
+            font-family: 'FontAwesome', sans-serif;
+            position: absolute;
+            bottom: -16px;
+            left: 0;
+            width: 100%;
+            font-size: 5rem;
+            color: $white-25;
+          }
+        }
+
+        &.theme-tab {
+          &.is-active a {
+            background: $white-25;
+            &:after {
+              content: '';
+            }
+          }
+        }
+
+        a {
+          color: white;
+          border: none;
+          display: inline-block;
+          position: relative;
+          &:hover {
+            background: none;
+            color: $yellow;
+          }
+        }
+      }
+    }
+
+    .fa {
+      font-size: 125%;
+    }
+
+    .typcn {
+      font-size: 175%;
+    }
+  }
+}
