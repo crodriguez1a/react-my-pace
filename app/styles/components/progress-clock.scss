@@ -1,0 +1,31 @@
+.radial-progress {
+  position: relative;
+  width: 320px;
+  margin: 0 auto;
+
+  .hide {
+    display: none;
+  }
+
+  .progress-time {
+    position: absolute;
+    font-size: 298%;
+    font-weight: 200;
+    top: 3.5em;
+    color: white;
+    width: 100%;
+  }
+
+  .legend {
+    display: none;
+  }
+
+  text {
+    display: none;
+  }
+}
+
+// SVG specific
+path {
+  stroke: rgba(255,255,255, 0.0) !important;
+}

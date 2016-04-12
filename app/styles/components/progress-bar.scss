@@ -1,0 +1,28 @@
+progress {
+  &.progress {
+    max-width: 300px;
+    margin: 0 auto;
+    
+    &::-webkit-progress-bar {
+      background: $white-25;
+      -webkit-transition : width 1s ease;
+      -moz-transition : width 1s ease;
+      -o-transition : width 1s ease;
+      transition : width 1s ease;
+    }
+    &::-webkit-progress-value {
+      background: $yellow;
+      -webkit-transition : width 1s ease;
+      -moz-transition : width 1s ease;
+      -o-transition : width 1s ease;
+      transition : width 1s ease;
+    }
+    &::-moz-progress-bar {
+      background: $yellow;
+      -webkit-transition : width 1s ease;
+      -moz-transition : width 1s ease;
+      -o-transition : width 1s ease;
+      transition : width 1s ease;
+    }
+  }
+}
