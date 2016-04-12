@@ -42,105 +42,124 @@
     }
   }
 
-  .routine-form {
-    position: relative;
+  .control {
+    &.hide {
+      display: none;
+    }
 
-    .control {
-      &.hide {
-        display: none;
+    &.toggle-buttons {
+      .button {
+        min-width: 50%;
       }
+    }
+  }
 
-      &.toggle-buttons {
+  input {
+    border-color: $blue-75;
+    background: none;
+
+    &[type="text"], &[type="number"], &[type="password"] {
+      color: white;
+    }
+  }
+
+  .manage-routine {
+    margin: 0;
+    padding: 0 1rem 1rem 0;
+    text-align: center;
+
+    li {
+      display: inline-block;
+      vertical-align: top;
+      margin: 0 1em 0 0;
+
+      &.edit-routine, &.edit-sound {
         .button {
-          min-width: 50%;
+          background: none;
+          color: $blue;
+          border-color: $blue-75;
+
+          &:hover, &.is-active {
+            background: $yellow;
+            color: $dark-canvas;
+            border-color: $yellow;
+          }
         }
       }
-    }
 
-    input {
-      border-color: $blue-75;
-      background: none;
-
-      &[type="text"], &[type="number"], &[type="password"] {
-        color: white;
-      }
-    }
-
-    .manage-routine {
-      margin: 0;
-      padding: 0 1rem 1rem 0;
-      text-align: center;
-
-      li {
-        display: inline-block;
-        vertical-align: top;
-        margin: 0 1em 0 0;
-
-        &.edit-routine {
-          .button {
-            background: none;
-            color: $blue;
-            border-color: $blue-75;
-
-            &:hover, &.is-active {
-              background: $yellow;
-              color: $dark-canvas;
-              border-color: $yellow;
+      &.edit-routine {
+        .button {
+          &.is-active {
+            &:after {
+              content: '\f0d7';
+              font-family: 'FontAwesome', sans-serif;
+              position: absolute;
+              bottom: -1rem;
+              left: 0;
+              width: 100%;
+              font-size: 1rem;
+              color: $yellow;
             }
           }
         }
       }
     }
+  }
 
-    .select {
-      &:after {
-        border-color: $blue;
-      }
-
-      select {
-        background: none;
-        border-color: $blue-75;
-        color: $blue;
-      }
+  .select {
+    &:after {
+      border-color: $blue;
     }
 
-    .toggle-list {
-      margin: 0;
+    select {
+      background: none;
+      border-color: $blue-75;
+      color: $blue;
+    }
+  }
 
-      li {
-        display: inline-block;
-        vertical-align: middle;
-        margin: 0 1rem 1rem 0;
-        text-align: center;
+  .toggle-list {
+    margin: 0;
 
-        .button:not(.is-active) {
-          background: none;
-          border-color: $blue-75;
+    li {
+      display: inline-block;
+      vertical-align: middle;
+      margin: 0 1rem 1rem 0;
+      text-align: center;
+
+      .button:not(.is-active) {
+        background: none;
+        border-color: $blue-75;
+
+        &:hover {
+          background: $yellow;
+          border-color: $yellow;
+          color: $dark-canvas;
+        }
+      }
+
+      .button {
+        &.is-active {
+          background: $blue;
+          border-color: $blue;
 
           &:hover {
-            background: $yellow;
-            border-color: $yellow;
             color: $dark-canvas;
           }
         }
-
-        .button {
-          &.is-active {
-            background: $blue;
-            border-color: $blue;
-
-            &:hover {
-              color: $dark-canvas;
-            }
-          }
-        }
       }
     }
+  }
 
-    .help {
-      text-align: right;
-      color: $grey;
-      font-size: 125%;
+  .edit-mode {
+    .button, .select {
+      border-color: $yellow;
     }
+  }
+
+  .help {
+    text-align: right;
+    color: $grey;
+    font-size: 125%;
   }
 }

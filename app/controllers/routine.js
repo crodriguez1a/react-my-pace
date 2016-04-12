@@ -277,7 +277,7 @@ class RoutineController {
   renderControls = () => {
     let timer = this.timer;
 
-    ReactDOM.render(
+    this.controls = ReactDOM.render(
       <ProgressControls
         timer={timer}
        />,
@@ -296,7 +296,7 @@ class RoutineController {
       <RestDuration
         duration={Session.find('restInterval')}
         shouldRest={Session.find('shouldRest')}
-        pulsate={resting ? 'pulsate' : ''}
+        pulsate={resting}
       />,
       document.getElementById('rest-duration')
     );
@@ -315,6 +315,7 @@ class RoutineController {
         timer={timer}
         units='seconds'
         controller={this}
+        controls={this.controls}
         />,
       document.getElementById('routine-form')
     );
