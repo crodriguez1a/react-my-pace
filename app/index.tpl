@@ -32,9 +32,9 @@
         <div class="container">
           <div class="content is-text-centered">
             <ul>
-              <li><a href="#" class="icon"><i class="fa fa-github"></i></a></li>
-              <li><a href="#" class="icon"><i class="fa fa-envelope-o"></i></a></li>
-              <li><a href="#" class="icon mit">MIT</a></li>
+              <li><a href="http://crodriguez1a.github.io/react-my-pace/" target="_blank" class="icon"><i class="fa fa-github"></i></a></li>
+              <li><a href="mailto:crodriguez1a@gmail.com" target="_blank" class="icon"><i class="fa fa-envelope-o"></i></a></li>
+              <li><a href="http://opensource.org/licenses/mit-license.php" target="_blank" class="icon mit">MIT</a></li>
             </ul>
           </div>
         </div>
