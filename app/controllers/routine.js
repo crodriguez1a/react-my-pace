@@ -296,7 +296,7 @@ class RoutineController {
       <RestDuration
         duration={Session.find('restInterval')}
         shouldRest={Session.find('shouldRest')}
-        pulsate={resting ? 'pulsate' : ''}
+        pulsate={resting}
       />,
       document.getElementById('rest-duration')
     );

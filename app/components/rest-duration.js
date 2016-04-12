@@ -21,7 +21,7 @@ class RestDuration extends React.Component {
           <i className={`fa typcn typcn-social-flickr ${this.props.shouldRest ? '' : 'hide'}`}></i>
           <i className={`fa typcn typcn-flash ${this.props.shouldRest ? 'hide' : ''}`}></i>
         </li>
-        <li className={`duration ${this.props.pulsate} ${this.props.shouldRest ? '' : 'hide'}`}>{this.props.duration}</li>
+        <li className={`duration ${this.props.pulsate ? 'pulsate' : 'hide'} ${this.props.shouldRest ? '' : 'hide'}`}>REST</li>
       </ul>
     );
   }
