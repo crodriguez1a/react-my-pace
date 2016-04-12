@@ -5,8 +5,6 @@ import { shortUnitName } from './../utils/conversions';
 import { Presets } from './../presets/routines';
 import _ from 'lodash';
 
-// Review
-
 /**
   Routine form fields
 
@@ -104,20 +102,6 @@ class RoutineForm extends React.Component {
   updateRestInterval = (interval) => {
     this.setState({
       restInterval: interval,
-      dirty: true
-    });
-  }
-
-  /**
-    Signal if sounds should be on or off
-
-    @method includeSound
-    @private
-  */
-  includeSound = (onOff, event) => {
-    let withSound = onOff;
-    this.setState({
-      withSound,
       dirty: true
     });
   }
@@ -281,6 +265,17 @@ class RoutineForm extends React.Component {
   }
 
   /**
+    Signal if sounds should be on or off
+
+    @method includeSound
+    @private
+  */
+  toggleSound = () => {
+    this.setState({ withSound: !this.state.withSound });
+    Session.save('withSound', !this.state.withSound);
+  }
+
+  /**
     Render form
 
     @method render
@@ -301,6 +296,9 @@ class RoutineForm extends React.Component {
           <li className='edit-routine'>
             <a className={`button ${this.state.editMode ? 'is-active' : ''}`} onClick={this.toggleEditMode}><i className='fa typcn typcn-pencil'></i></a>
           </li>
+          <li className='edit-sound'>
+            <a className={`button`} onClick={this.toggleSound}><i className={`fa typcn typcn-volume-${this.state.withSound ? 'up' : 'mute'}`}></i></a>
+          </li>
         </ul>
         <div className={`edit-mode ${this.state.editMode ? '' : 'hide'}`}>
           <p className='control has-icon'>
@@ -318,14 +316,6 @@ class RoutineForm extends React.Component {
             </span>
           </p>
           <ul className='toggle-list'>
-            <li className='control has-addons'>
-              <a className={`button ${this.state.withSound ? 'is-active' : 'is-outlined'}`} onClick={this.includeSound.bind(this, true)}>
-                <i className='fa typcn typcn-volume-up'></i>
-              </a>
-              <a className={`button ${this.state.withSound ? 'is-outlined' : 'is-active'}`} onClick={this.includeSound.bind(this, false)}>
-                <i className='fa typcn typcn-volume-mute'></i>
-              </a>
-            </li>
             <li className='control has-addons'>
               <a className={`button ${this.state.shouldRest ? 'is-active' : 'is-outlined'}`} onClick={this.toggleShouldRest.bind(this, true)}>
                 <i className='fa typcn typcn-social-flickr'></i>
