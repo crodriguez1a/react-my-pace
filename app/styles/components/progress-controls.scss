@@ -8,6 +8,14 @@
 
       li {
         display: inline-block;
+
+        a {
+          display: inline-block;
+          min-width: 4em;
+          min-height: 3.5em;
+          font-size: 110%;
+        }
+
         &.is-active a {
           background: none;
           color: $yellow;
@@ -15,10 +23,10 @@
             content: '\f0d8';
             font-family: 'FontAwesome', sans-serif;
             position: absolute;
-            bottom: -16px;
+            bottom: -1rem;
             left: 0;
             width: 100%;
-            font-size: 5rem;
+            font-size: 8rem;
             color: $white-25;
           }
         }
