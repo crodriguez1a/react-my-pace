@@ -252,7 +252,6 @@ module.exports = function(grunt) {
       Run local build and test servers
       Build server runs on 1333
       Test server runs on 1334
-      Watch reload runs on 1337
       See README for more details
   */
   grunt.registerTask('serve', [
