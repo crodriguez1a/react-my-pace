@@ -13,9 +13,6 @@ main {
       padding: 0;
       margin: 0;
       background: $summer;
-      -webkit-transition: background-color 250ms ease-out 100ms;
-      -moz-transition: background-color 250ms ease-out 100ms;
-      -o-transition: background-color 250ms ease-out 100ms;
       transition: background-color 250ms ease-out 100ms;
 
       &.summer {

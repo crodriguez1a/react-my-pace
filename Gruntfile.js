@@ -187,7 +187,8 @@ module.exports = function(grunt) {
       common: {
         files: [
           { expand: true, flatten: true, src: ['bower_components/font-awesome/fonts/*', 'bower_components/typicons.font/src/font/*'], dest: 'build/fonts/' },
-          { expand: true, flatten: true, src: ['public/assets/sounds/*'], dest: 'build/assets/sounds/' }
+          { expand: true, flatten: true, src: ['public/assets/sounds/*'], dest: 'build/assets/sounds/' },
+          { expand: true, flatten: true, src: ['public/assets/routines/*'], dest: 'build/assets/routines/' }
         ]
       },
       tests: {

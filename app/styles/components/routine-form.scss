@@ -1,72 +1,49 @@
 .routine {
-  &.content {
-    padding: 1rem;
-    padding-top: 2rem;
-    min-height: 10rem;
+  padding: 2rem 1rem 2rem 1rem;
+  max-width: 290px;
 
-    .button {
-      display: inline-block;
-      min-height: 2rem;
+  a.button, a.button.is-primary {
+    &.apply, &.reset {
+      min-width: 50%;
+      color: $dark-canvas;
 
       i {
-        display: inline-block;
-        height: 100%;
-        padding-top: 0.25rem;
-      }
-
-      &.is-primary {
-        &:hover {
-          background: $blue2;
-          border-color: $blue2;
-        }
-      }
-    }
-
-    .button:not(.is-primary) {
-      color: white;
-
-      &.is-active {
-        color: $dark-canvas;
+        padding: 0 1rem 0 1rem;
       }
 
       &:hover {
-        color: $blue;
-      }
-    }
-
-    label {
-      color: white;
-      font-size: 0.65rem;
-      opacity: 0.8;
-      text-transform: uppercase;
-    }
-  }
-
-  .control {
-    &.hide {
-      display: none;
-    }
-
-    &.toggle-buttons {
-      .button {
-        min-width: 50%;
+        background: $yellow;
+        border-color: $yellow;
+        color: $dark-canvas;
       }
     }
   }
 
-  input {
-    border-color: $blue-75;
-    background: none;
+  .has-icon {
+    .input {
+      border: none;
+      background: $black-10;
+      font-size: 1.25rem;
 
-    &[type="text"], &[type="number"], &[type="password"] {
-      color: white;
+      &[type="text"], &[type="number"], &[type="password"] {
+        color: $white-75;
+      }
+
+      &:focus + .fa {
+        color: $white-75;
+      }
+    }
+
+    .fa {
+      color: $white-50;
     }
   }
 
-  .manage-routine {
-    margin: 0;
-    padding: 0 1rem 1rem 0;
+
+  .top-level-opts {
     text-align: center;
+    margin: 0 auto;
+    padding: 0;
 
     li {
       display: inline-block;
@@ -74,10 +51,10 @@
       margin: 0 1em 0 0;
 
       &.edit-routine, &.edit-sound {
-        .button {
-          background: none;
-          color: $blue;
-          border-color: $blue-75;
+        a.button {
+          background: $blue;
+          color: $dark-canvas;
+          border-color: $blue;
 
           &:hover, &.is-active {
             background: $yellow;
@@ -88,7 +65,7 @@
       }
 
       &.edit-routine {
-        .button {
+        a.button {
           &.is-active {
             &:after {
               content: '\f0d7';
@@ -108,13 +85,13 @@
 
   .select {
     &:after {
-      border-color: $blue;
+      border-color: $dark-canvas;
     }
 
     select {
-      background: none;
-      border-color: $blue-75;
-      color: $blue;
+      background: $blue;
+      border-color: $blue;
+      color: $dark-canvas;
     }
   }
 
@@ -127,33 +104,33 @@
       margin: 0 1rem 1rem 0;
       text-align: center;
 
-      .button:not(.is-active) {
-        background: none;
-        border-color: $blue-75;
+      a.button {
+        background: $blue-25;
+        color: $dark-canvas;
+        border-color: $blue-25;
+        border-width: 1px;
+
+        &.is-outline {
+          &:hover {
+            color: red;
+          }
+        }
 
         &:hover {
           background: $yellow;
-          border-color: $yellow;
           color: $dark-canvas;
-        }
-      }
+          border-color: $yellow;
 
-      .button {
-        &.is-active {
-          background: $blue;
-          border-color: $blue;
-
-          &:hover {
+          &.is-active {
             color: $dark-canvas;
           }
         }
-      }
-    }
-  }
 
-  .edit-mode {
-    .button, .select {
-      border-color: $yellow;
+        &.is-active {
+          background: $blue;
+          border-color: $blue;
+        }
+      }
     }
   }
 

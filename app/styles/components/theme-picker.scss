@@ -65,7 +65,6 @@
           &.blurple {
             &:after {
               background: #4776E6; /* fallback for old browsers */
-              background: -webkit-linear-gradient(to left, #4776E6 , #8E54E9); /* Chrome 10-25, Safari 5.1-6 */
               background: linear-gradient(to left, #4776E6 , #8E54E9); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
             }
           }
@@ -73,7 +72,6 @@
           &.sunrise {
             &:after {
               background: #f46b45; /* fallback for old browsers */
-              background: -webkit-linear-gradient(to left, #f46b45 , #eea849); /* Chrome 10-25, Safari 5.1-6 */
               background: linear-gradient(to left, #f46b45 , #eea849); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
             }
           }
@@ -81,7 +79,6 @@
           &.emerald {
             &:after {
               background: #4CB8C4; /* fallback for old browsers */
-              background: -webkit-linear-gradient(to left, #4CB8C4 , #3CD3AD); /* Chrome 10-25, Safari 5.1-6 */
               background: linear-gradient(to left, #4CB8C4 , #3CD3AD); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
             }
           }
@@ -89,7 +86,6 @@
           &.rosewater {
             &:after {
               background: #E55D87; /* fallback for old browsers */
-              background: -webkit-linear-gradient(to left, #E55D87 , #5FC3E4); /* Chrome 10-25, Safari 5.1-6 */
               background: linear-gradient(to left, #E55D87 , #5FC3E4); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
             }
           }

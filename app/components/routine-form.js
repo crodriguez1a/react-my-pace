@@ -3,7 +3,12 @@ import Session from './../session/routine';
 import ProgressClock from './../components/progress-clock';
 import { shortUnitName } from './../utils/conversions';
 import { Presets } from './../presets/routines';
+import Fetch from './../services/fetch';
 import _ from 'lodash';
+
+const {
+  fetchPreset
+} = Fetch;
 
 /**
   Routine form fields
@@ -17,12 +22,12 @@ class RoutineForm extends React.Component {
     super(props);
     this.state = {
       timer: props.timer,
-      units: props.units,
       controller: props.controller,
       controls: props.controls,
       dirty: true,
-      routine: Session.find('name'),
+      name: Session.find('name'),
       interval: Session.find('interval'),
+      units: Session.find('interval') > 60 ? 'minutes' : 'seconds',
       totalTasks: Session.find('totalTasks'),
       shouldRest: Session.find('shouldRest'),
       restInterval: Session.find('restInterval'),
@@ -58,6 +63,32 @@ class RoutineForm extends React.Component {
   }
 
   /**
+    Calculated interval based on displayed interval and units provided
+    Only the computed value will be stored in milliseconds
+
+    @property convertedInterval
+    @returns Number
+    @private
+  */
+  get convertedInterval() {
+    let interval = this.displayedInterval;
+    return this.state.units === 'seconds' ? interval : interval * 60;
+  }
+
+  /**
+    Display an human readable interval (as minutes or seconds),
+    to be displayed in the input field
+
+    @property displayedInterval
+    @private
+    @returns Number
+  */
+  get displayedInterval() {
+    let interval = this.state.interval;
+    return interval > 60 ? interval / 60 : interval;
+  }
+
+  /**
     Change event for tasks
 
     @method updateTotalTasks
@@ -84,6 +115,7 @@ class RoutineForm extends React.Component {
     Toggle shouldRest property
 
     @method toggleShouldRest
+    @param onOff {Bool}
     @private
   */
   toggleShouldRest = (onOff, event) => {
@@ -98,6 +130,7 @@ class RoutineForm extends React.Component {
     Update rest interval
 
     @method updateRestInterval
+    @param interval {Number}
     @private
   */
   updateRestInterval = (interval) => {
@@ -111,6 +144,7 @@ class RoutineForm extends React.Component {
     Signal if the name of the upcoming task should be displayed
 
     @method displayNext
+    @param onOff {Bool}
     @private
   */
   displayNext = (onOff, event) => {
@@ -144,11 +178,23 @@ class RoutineForm extends React.Component {
     Reset form state to be in sync with preset
 
     @method syncWithPreset
+    @param onOff {String} Name of preset routine to sync with
     @private
   */
   syncWithPreset = (routine) => {
     // Fetch routine from presets
     let preset = Presets(routine);
+
+    // TODO Async fetch
+    // fetchPreset(preset).then(
+    //   (res) => {
+    //     console.log(res);
+    //   },
+    //   (err) => {
+    //     console.log(err);
+    //   }
+    // );
+
     this.syncState(preset);
   }
 
@@ -172,10 +218,11 @@ class RoutineForm extends React.Component {
     // Update component state
     this.setState({
       interval: routine.find('interval'),
+      units: routine.find('interval') > 60 ? 'minutes' : 'seconds',
       totalTasks: routine.find('totalTasks'),
       shouldRest: routine.find('shouldRest'),
       restInterval: routine.find('restInterval'),
-      routine: routine.find('name')
+      name: routine.find('name')
     });
   }
 
@@ -214,23 +261,22 @@ class RoutineForm extends React.Component {
     // Stop the timer if it is running
     this.state.timer.stop();
 
-    // Compute interval with units provided
-    let i = this.state.interval;
-    let u = this.state.units;
-    this.state.interval = u === 'seconds' ? i : i * 60;
-
     // Cache current state
     this.setState({ dirtyState: _.omit(this.state, ['editMode']) });
 
-    // Routine params/options
-    let totalTasks = this.state.totalTasks;
-    let shouldRest = this.state.shouldRest;
-    let showNext = this.state.showNext;
-    let restInterval = this.state.restInterval;
-    let interval = this.state.interval;
-    let name = this.state.routine;
+    // Get computed
+    let interval = this.convertedInterval;
 
-    // Sync with user state
+    // Sync session with user state
+    const {
+      name,
+      totalTasks,
+      shouldRest,
+      showNext,
+      restInterval
+    } = this.state;
+
+    // Save to session state
     Session.saveAll({
       name,
       interval,
@@ -240,6 +286,7 @@ class RoutineForm extends React.Component {
       restInterval
     });
 
+    // Sync display from controller
     this.syncWithController();
 
     // Update dirty
@@ -260,12 +307,6 @@ class RoutineForm extends React.Component {
     // when collapsing form, if dirty, sync with session
     if (this.state.dirty && this.state.editMode) {
       this.syncWithSession();
-    }
-
-    // pause the clock
-    let controls = this.state.controls;
-    if (controls.state.status === 'started') {
-      controls.pauseTimer();
     }
   }
 
@@ -289,10 +330,10 @@ class RoutineForm extends React.Component {
   render = () => {
     return (
       <div className='content'>
-        <ul className='control manage-routine'>
+        <ul className='control top-level-opts'>
           <li className='select-routine'>
             <span className='select'>
-              <select onChange={this.updatePresetRoutine} value={this.state.routine}>
+              <select onChange={this.updatePresetRoutine} value={this.state.name}>
                 <option value='ShortTabata'>Short Tabata</option>
                 <option value='Boxing12Rounds'>Boxing 12 Rounds</option>
               </select>
@@ -311,7 +352,7 @@ class RoutineForm extends React.Component {
             <i className='fa fa-repeat'></i>
           </p>
           <p className='control has-icon is-grouped'>
-            <input onClick={this.makeDirty} onChange={this.updateIntervalDuration} placeholder='task duration' value={this.state.interval} className='input' type='number' />
+            <input onClick={this.makeDirty} onChange={this.updateIntervalDuration} placeholder='task duration' value={this.displayedInterval} className='input' type='number' />
             <i className='fa fa-clock-o'></i>
             <span className='select'>
               <select onChange={this.updateIntervalUnit} value={this.state.units}>
@@ -349,11 +390,11 @@ class RoutineForm extends React.Component {
               </a>
             </li>
           </ul>
-          <p className='toggle-buttons control is-fullwidth has-addons'>
-            <a className={`button is-primary ${this.state.dirty ? '' : 'is-disabled'}`} onClick={this.applyChanges}>
+          <p className='control is-fullwidth has-addons'>
+            <a className={`apply button is-primary ${this.state.dirty ? '' : 'is-disabled'}`} onClick={this.applyChanges}>
               Apply <i className='fa fa-check'></i>
             </a>
-            <a className={`button is-primary ${this.state.dirty ? 'is-disabled' : ''}`} onClick={this.applyReset}>
+            <a className={`reset button is-primary ${this.state.dirty ? 'is-disabled' : ''}`} onClick={this.applyReset}>
               Reset <i className='fa fa-reply'></i>
             </a>
           </p>
