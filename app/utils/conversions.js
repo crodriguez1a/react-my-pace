@@ -4,6 +4,7 @@
 
   @method shortUnitName
   @private
+  @param unit {string} Minutes or seconds
 */
 export const shortUnitName = (unit) => {
   let map = {

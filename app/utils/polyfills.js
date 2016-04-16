@@ -1,3 +1,7 @@
+/**
+  Object assign polyfill (MDN)
+  @private
+*/
 if (typeof Object.assign != 'function') {
   (function () {
     Object.assign = function (target) {

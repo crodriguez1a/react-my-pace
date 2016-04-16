@@ -125,6 +125,7 @@ class RoutineController {
     Update the progress of the clock
 
     @method updateClock
+    @param ms {Number} Current timer progress in milliseconds
     @private
   */
   updateClock = (ms) => {
@@ -171,6 +172,7 @@ class RoutineController {
     Alternate colors for intervals in sequence
 
     @method updateRadialColor
+    @param sequenceItem {Object} An item in the invterval sequence
     @private
   */
   updateRadialColor = (sequenceItem) => {
@@ -181,6 +183,7 @@ class RoutineController {
     Evaluate the interval sequence and update the progress and task counts accordingly
 
     @method updateCount
+    @param reset {Bool} Signal if count should reset to default
     @private
   */
   updateCount = (reset) => {
@@ -231,6 +234,8 @@ class RoutineController {
    Render the progress bar and the updated task count components
 
    @method updateTaskProgress
+   @param percentage {Number} computed percentage of task progress
+   @param count {Number} elapsed number of tasks
    @private
   */
   updateTaskProgress = (percentage, count) => {
@@ -242,6 +247,7 @@ class RoutineController {
     Render the task count component
 
     @method renderTaskCount
+    @param count {Number} elapsed number of tasks
     @private
   */
   renderTaskCount = (count) => {
@@ -257,6 +263,7 @@ class RoutineController {
     Render the progress bar component
 
     @method renderProgressBar
+    @param percentage {Number} computed percentage of task progress
     @private
   */
   renderProgressBar = (percentage) => {
@@ -289,6 +296,7 @@ class RoutineController {
     Render the rest duration component which displays the current duration of the rest interval
 
     @method renderRestDuration
+    @param resting {Bool} Signal if current interval is a rest interval
     @private
   */
   renderRestDuration = (resting) => {

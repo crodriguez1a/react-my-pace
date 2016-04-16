@@ -115,6 +115,7 @@ class RoutineForm extends React.Component {
     Toggle shouldRest property
 
     @method toggleShouldRest
+    @param onOff {Bool}
     @private
   */
   toggleShouldRest = (onOff, event) => {
@@ -129,6 +130,7 @@ class RoutineForm extends React.Component {
     Update rest interval
 
     @method updateRestInterval
+    @param interval {Number}
     @private
   */
   updateRestInterval = (interval) => {
@@ -142,6 +144,7 @@ class RoutineForm extends React.Component {
     Signal if the name of the upcoming task should be displayed
 
     @method displayNext
+    @param onOff {Bool}
     @private
   */
   displayNext = (onOff, event) => {
@@ -175,6 +178,7 @@ class RoutineForm extends React.Component {
     Reset form state to be in sync with preset
 
     @method syncWithPreset
+    @param onOff {String} Name of preset routine to sync with
     @private
   */
   syncWithPreset = (routine) => {
@@ -272,6 +276,7 @@ class RoutineForm extends React.Component {
       restInterval
     } = this.state;
 
+    // Save to session state
     Session.saveAll({
       name,
       interval,
