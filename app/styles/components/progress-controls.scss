@@ -14,6 +14,15 @@
           min-width: 4em;
           min-height: 3.5em;
           font-size: 110%;
+
+          .fa {
+            font-size: 125%;
+            padding-top: 0.25rem;
+          }
+
+          .typcn {
+            font-size: 175%;
+          }
         }
 
         &.is-active a {
@@ -51,14 +60,6 @@
           }
         }
       }
-    }
-
-    .fa {
-      font-size: 125%;
-    }
-
-    .typcn {
-      font-size: 175%;
     }
   }
 }

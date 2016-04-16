@@ -313,7 +313,6 @@ class RoutineController {
     ReactDOM.render(
       <RoutineForm
         timer={timer}
-        units='seconds'
         controller={this}
         controls={this.controls}
         />,

@@ -27,6 +27,10 @@ $generic: $grey;
           color: #{$color};
         }
 
+        &.is-active {
+          transition: all 250ms ease-out 100ms;
+        }
+
         /*
          outliers
         */

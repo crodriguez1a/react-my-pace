@@ -1,0 +1,194 @@
+{
+  "data":[
+    {
+      "id": 0,
+      "name":"Soccer Scrimmage",
+      "attributes":[
+        {
+          "name":"First Half",
+          "tasks":1,
+          "interval":1260
+        },
+        {
+          "name":"Break",
+          "tasks":1,
+          "interval":420
+        },
+        {
+          "name":"Second Half",
+          "tasks":1,
+          "interval":1260
+        }
+      ],
+      "category":"fitness",
+      "tags":"50 minutes, fitness, scrimmage, soccer, indoor soccer, kids soccer"
+    },
+    {
+      "id": 1,
+      "name":"Boxing 30 Minutes",
+      "attributes":[
+        {
+          "name":"Jump Rope",
+          "tasks":3,
+          "interval":180
+        },
+        {
+          "name":"Shadow Boxing",
+          "tasks":3,
+          "interval":180
+        },
+        {
+          "name":"Heavy Bag",
+          "tasks":3,
+          "interval":180
+        },
+        {
+          "name":"Road Work",
+          "tasks":1,
+          "interval":180
+        }
+      ],
+      "category":"fitness",
+      "tags":"30 minutes, fitness, sports, boxing"
+    },
+    {
+      "id": 2,
+      "name":"Boxing 60 Minutes",
+      "attributes":[
+        {
+          "name":"Jump Rope",
+          "tasks":3,
+          "interval":180
+        },
+        {
+          "name":"Shadow Boxing",
+          "tasks":3,
+          "interval":180
+        },
+        {
+          "name":"Heavy Bag",
+          "tasks":3,
+          "interval":180
+        },
+        {
+          "name":"Defensive Drills",
+          "tasks":1,
+          "interval":180
+        },
+        {
+          "name":"Offensive Drills",
+          "tasks":3,
+          "interval":180
+        },
+        {
+          "name":"Full Speed Combinations",
+          "tasks":3,
+          "interval":180
+        },
+        {
+          "name":"Speed Bag",
+          "tasks":3,
+          "interval":180
+        },
+        {
+          "name":"Cool Down",
+          "tasks":1,
+          "interval":180
+        }
+      ],
+      "category":"fitness",
+      "tags":"60 minutes, fitness, sports, boxing"
+    },
+    {
+      "id": 3,
+      "name":"MCAT",
+      "attributes":[
+        {
+          "name":"Physical Sciences",
+          "tasks":52,
+          "interval":81
+        },
+        {
+          "name":"Break",
+          "tasks":1,
+          "interval":600
+        },
+        {
+          "name":"Verbal Reasoning",
+          "tasks":40,
+          "interval":90
+        },
+        {
+          "name":"Break",
+          "tasks":1,
+          "interval":600
+        },
+        {
+          "name":"Biological Sciences",
+          "tasks":52,
+          "interval":81
+        },
+        {
+          "name":"Break",
+          "tasks":1,
+          "interval":600
+        },
+        {
+          "name":"Trial Section",
+          "tasks":32,
+          "interval":84
+        }
+      ],
+      "category":"education",
+      "tags":"Aprox. 4.5 hours, education, proctor, testing, MCAT, science, medical, college, admission, test, physicians, medical school, medicine, exam"
+    },
+    {
+      "id": 4,
+      "name":"SAT",
+      "attributes":[
+        {
+          "name":"Math Multiple Choice",
+          "tasks":44,
+          "interval":68
+        },
+        {
+          "name":"Math Grids Ins",
+          "tasks":10,
+          "interval":120
+        },
+        {
+          "name":"Critical Reading Sentence Completions",
+          "tasks":19,
+          "interval":160
+        },
+        {
+          "name":"Critical Reading Reading Comprehension",
+          "tasks":48,
+          "interval":25
+        },
+        {
+          "name":"Writing Identifying Sentence Errors",
+          "tasks":18,
+          "interval":83
+        },
+        {
+          "name":"Writing Improving Sentences",
+          "tasks":25,
+          "interval":84
+        },
+        {
+          "name":"Writing Improving Paragraphs",
+          "tasks":6,
+          "interval":100
+        },
+        {
+          "name":"Experimental",
+          "tasks":1,
+          "interval":1500
+        }
+      ],
+      "category":"education",
+      "tags":"Aprox. 4 hours, education, proctor, testing, PSAT, SAT, college, high school, admission, college board"
+    }
+  ]
+}
