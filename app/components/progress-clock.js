@@ -8,6 +8,17 @@ import React from 'react';
   @private
 */
 class ProgressClock extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.clock = props.clock;
+    this.children = props.children;
+  }
+
+  public clock = null;
+
+  public children = null;
+
   /**
     Render radial progress chart and clocks
 
@@ -17,8 +28,8 @@ class ProgressClock extends React.Component {
   render() {
     return (
       <div className='progress-clock'>
-        <div className='progress-time'>{this.props.clock}</div>
-        {this.props.children}
+        <div className='progress-time'>{this.clock}</div>
+        {this.children}
       </div>
     );
   }

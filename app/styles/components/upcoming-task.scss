@@ -1,0 +1,20 @@
+.upcoming-task {
+  position: relative;
+  padding: 1.5rem 0 1.5rem 0;
+  background: linear-gradient(25deg, $white-25, rgba(255,255,255, 0));
+
+  div {
+    width: 320px;
+    margin: 0 auto;
+    text-align: center;
+
+    h1.title {
+      color: white;
+      text-transform: capitalize;
+
+      &.current {
+        margin-bottom: 1rem;
+      }
+    }
+  }
+}
