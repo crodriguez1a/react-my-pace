@@ -1,6 +1,5 @@
-#MyPace 
-####A timer for interval based activities
-Written with React
+# MyPace 
+#### A timer for interval based activities
 
 ---
 
@@ -12,5 +11,5 @@ Written with React
 
 ---
 
-####Demo
+#### Demo
 <http://crodriguez1a.github.io/react-my-pace/>
