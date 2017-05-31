@@ -1,3 +1,5 @@
+// TODO Deprecate controller architecture in favor of Redux
+
 import Polyfills from './utils/polyfills';
 import Controllers from './controllers/index';
 import attachFastClick from 'fastclick';

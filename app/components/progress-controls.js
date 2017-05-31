@@ -26,6 +26,8 @@ class ProgressControls extends React.Component {
     this.tapControl();
   }
 
+  state = null;
+
   /**
     Provide the user with keyboard access to pause and play
 

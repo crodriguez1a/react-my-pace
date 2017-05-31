@@ -1,3 +1,4 @@
+// TODO Deprecate this pattern
 import RoutineController from './../controllers/routine';
 
 const Controllers = {

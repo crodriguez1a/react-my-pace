@@ -1,3 +1,4 @@
+// TODO Deprecate in favor of Redux
 import ls from 'local-storage';
 
 /**

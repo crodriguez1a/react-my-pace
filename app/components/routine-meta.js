@@ -11,7 +11,14 @@ import moment from 'moment';
 class RoutineMeta extends React.Component {
   constructor(props) {
     super(props);
+
+    this.elapsed = props.elapsed;
+    this.name = props.name;
   }
+
+  name = '';
+
+  elapsed = 0;
 
   get formattedElapsed() {
     let elapsed = moment.duration(this.props.elapsed);
@@ -27,7 +34,7 @@ class RoutineMeta extends React.Component {
   render() {
     return (
       <ul>
-        <li className='title'>{this.props.name}</li>
+        <li className='title'>{this.name}</li>
         <li className='total-time'>{this.formattedElapsed}</li>
       </ul>
     );

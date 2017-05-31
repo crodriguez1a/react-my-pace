@@ -1,3 +1,5 @@
+// TODO Deprecate this controller pattern
+
 import React from 'react';
 import ReactDOM from 'react-dom';
 import moment from 'moment';
@@ -24,7 +26,6 @@ const audioPlayer = new Player();
   @private
 */
 class RoutineController {
-  constructor() {
     /**
       Keep track elapsed intervals in sequence (including rests)
 
@@ -32,47 +33,46 @@ class RoutineController {
       @private
       @returns Number
     */
-    this.progressCount = 0;
+  progressCount = 0;
 
-    /**
-      Keep track of elapsed tasks in sequence (excludes rest intervals)
+  /**
+    Keep track of elapsed tasks in sequence (excludes rest intervals)
 
-      @property taskCount
-      @private
-      @returns Number
-    */
-    this.taskCount = Session.find('totalTasks');
+    @property taskCount
+    @private
+    @returns Number
+  */
+  taskCount = Session.find('totalTasks');
 
-    /**
-      Configure D3 pie chart
+  /**
+    Configure D3 pie chart
 
-      @property chartConf
-      @private
-      @returns Object
-    */
-    this.chartConf = {
-      width: 320,
-      height: 320,
-      innerRadius: 110,
-      name(d) {
-        return d.name;
+    @property chartConf
+    @private
+    @returns Object
+  */
+  chartConf = {
+    width: 320,
+    height: 320,
+    innerRadius: 110,
+    name(d) {
+      return d.name;
+    },
+    value(d) {
+      return d.value;
+    },
+    series: [
+      {
+        field: 'remaining',
+        name: 'remaining',
+        color: radialColors.background
       },
-      value(d) {
-        return d.value;
-      },
-      series: [
-        {
-          field: 'remaining',
-          name: 'remaining',
-          color: radialColors.background
-        },
-        {
-          field: 'time',
-          name: 'time',
-          color: radialColors.primary
-        }
-      ]
-    }
+      {
+        field: 'time',
+        name: 'time',
+        color: radialColors.primary
+      }
+    ]
   }
 
   /**

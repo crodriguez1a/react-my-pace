@@ -25,6 +25,7 @@ class RoutineForm extends React.Component {
       controller: props.controller,
       controls: props.controls,
       dirty: true,
+      // TODO All this session stuff will move to redux
       name: Session.find('name'),
       interval: Session.find('interval'),
       units: Session.find('interval') > 60 ? 'minutes' : 'seconds',
@@ -35,6 +36,20 @@ class RoutineForm extends React.Component {
       editMode: false
     };
   }
+
+  // TODO JSDocs
+  timer = null;
+  controller = null;
+  controls = null;
+  dirty = null;
+  name = null;
+  interval = null;
+  units = null;
+  totalTasks = null;
+  shouldRest = null;
+  restInterval = null;
+  withSound = null;
+  editMode = null;
 
   /**
     Change event for interval

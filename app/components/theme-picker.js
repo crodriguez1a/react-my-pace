@@ -10,20 +10,21 @@ import Session from './../session/routine';
 */
 class ThemePicker extends React.Component {
   constructor(props) {
-    super(props)
-    this.state = {
-      theme: Session.find('theme'),
-      model: [
-        { name: 'summer' },
-        { name: 'ocean' },
-        { name: 'energy' },
-        { name: 'focus' },
-        { name: 'blurple' },
-        { name: 'sunrise' },
-        { name: 'emerald' },
-        { name: 'rosewater' }
-      ]
-    }
+    super(props);
+  }
+
+  state = {
+    theme: Session.find('theme'), // TODO all session should go to Redux
+    model: [
+      { name: 'summer' },
+      { name: 'ocean' },
+      { name: 'energy' },
+      { name: 'focus' },
+      { name: 'blurple' },
+      { name: 'sunrise' },
+      { name: 'emerald' },
+      { name: 'rosewater' }
+    ]
   }
 
   /**

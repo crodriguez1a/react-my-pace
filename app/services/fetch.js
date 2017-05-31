@@ -1,4 +1,4 @@
-
+// TODO Deprecate in favor of async await, also implement Redux
 class Fetch {
   constructor() {
     this.presetsUrl = 'assets/routines/presets.json';

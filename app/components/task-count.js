@@ -8,6 +8,12 @@ import React from 'react';
   @private
 */
 class TaskCount extends React.Component {
+  super(props) {
+    this.count = props.count;
+  }
+
+  count = 0;
+
   /**
     Render task count
 
@@ -17,7 +23,7 @@ class TaskCount extends React.Component {
   render() {
     return (
       <div className='task-count'>
-        <div className='count'>{this.props.count}</div>
+        <div className='count'>{this.count}</div>
       </div>
     );
   }

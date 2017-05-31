@@ -15,9 +15,9 @@ class ProgressClock extends React.Component {
     this.children = props.children;
   }
 
-  public clock = null;
+  clock = null;
 
-  public children = null;
+  children = null;
 
   /**
     Render radial progress chart and clocks
